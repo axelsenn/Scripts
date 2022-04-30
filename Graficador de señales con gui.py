@@ -1,6 +1,7 @@
 from numpy import cos, sin, arange, pi
 import matplotlib.pyplot as plt
 import PySimpleGUI as sg
+import winsound
 
 # Define the window's contents
 layout = [[sg.Text("w = (a/b)*π \n")], [sg.Text("Ingrese función(cos o sin)")],
@@ -63,15 +64,21 @@ while True:
         window['-OUTPUTw-'].update("w = " + str(round_a) + "/" + str(round_b), text_color = 'yellow')
         window['-OUTPUTx-'].update("x[n] = " + str(func) + "(" + str(round_a) + "n" + "/" + str(round_b) + ")", text_color = 'yellow')
 
+   
+
     # Graficar función
     plt.stem(n, x)
     plt.xlabel('n')
     plt.ylabel('x [n]')
     plt.xticks(n)
     plt.grid()
-    plt.show()
+    plt.show(block = False)
+
+    # Tada!
+    filename = "Windows 98 Sound_ Tada.wav"
+    winsound.PlaySound(filename, winsound.SND_FILENAME)
+
 
 
 # Finish up by removing from the screen
 window.close()
-
