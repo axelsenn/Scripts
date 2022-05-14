@@ -44,12 +44,30 @@ A = np.amax(aceleración)
 b = log(max/A)/(tmax-t0)
 decaimiento = A*np.exp(b*(tiempo-t0))
 
+# Cálculo de período
+index_A = aceleración.tolist().index(A)
+A2 = np.amax(aceleración[index_A+5:])
+index_A2 = aceleración.tolist().index(A2)
+t_A = tiempo[index_A]
+t_A2 = tiempo[index_A2]
+print("index A2 =" + str(index_A2))
+print("A =" + str(A))
+print("A2 =" + str(A2))
+print("t_A =" + str(t_A))
+print("t_A2 =" + str(t_A2))
+Td = t_A2 - t_A
+print("Td =" + str(Td))
+
+# Cálculo de omega d
+wd = (2*pi)/Td
+print("wd =" + str(wd))
+
 # Print de la función
-print("y(t) ="+ str(round(A,2)) + "e^(" + str(b) + "t)")
+print("y(t) ="+ str(round(A,3)) + "e^(" + str(b) + "t)")
 print("")
 print("b = " + str(b))
 print("")
-print("xi = " + str(abs(b)/42.45))
+print("xi = " + str(abs(b)/wd))
 
 # Ploteo
 plt.plot(tiempo,aceleración, color='b', label='oscilación')
@@ -62,3 +80,4 @@ plt.yticks(np.linspace(-A,A,5))
 plt.legend()
 plt.grid()
 plt.show()
+
